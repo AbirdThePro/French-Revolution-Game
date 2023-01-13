@@ -1,25 +1,41 @@
 #include <iostream>
 using namespace std;
 
+#include <unistd.h>
+
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
+typedef unsigned int uint;
+
+// game window
+RenderWindow window;
+
+// pauses for x milliseconds
+void pause(uint x) {
+    sleep(milliseconds(x));
+}
+
+// creates window
+void createWindow(char* title, uint width, uint height) {
+    RenderWindow window(VideoMode(width, height), title);
+}
+
 // loads sprite from image
-Sprite loadSprite(char* filename) {
+Sprite loadSprite(const char* filename) {
     // stores texture
     Texture texture;
-    // attempts to load from the file
-    if (!texture.loadFromFile(filename)) {
-        // if it cannot load, print an error message
-        cout << "Unable to load image " << filename << endl;
-        return;
-    }
-    // if loading succeeded, return sprite object from texture
-    return Sprite(texture);
+    texture.loadFromFile(filename);
+    // if loading succeeded, create sprite object from texture
+    Sprite sprite(texture);
+    // sets origin to center
+    sprite.setOrigin(Vector2f(sprite.getScale().x / 2, sprite.getScale().y / 2));
+    // returns new sprite object
+    return sprite;
 }
 
 // draws sprite with given information
-void drawSprite(RenderWindow window, Sprite sprite, int x, int y, int width, int height, int rotation) {
+void drawSprite(Sprite sprite, int x, int y, uint width, uint height, uint rotation) {
     // updates sprite information if necessary
     if (sprite.getPosition() != Vector2f(x, y)) sprite.setPosition(x, y);
     if (sprite.getScale() != Vector2f(width, height)) sprite.setScale(width, height);
