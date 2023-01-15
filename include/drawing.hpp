@@ -2,6 +2,7 @@
 using namespace std;
 
 #include <unistd.h>
+#include <string.h>
 
 #include <SFML/Graphics.hpp>
 using namespace sf;

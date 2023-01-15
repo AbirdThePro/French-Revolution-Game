@@ -48,12 +48,13 @@ struct GameState state;
 int main() {
     // creates window
     #ifdef SFML
-    //RenderWindow window(VideoMode(500, 400), String("French Revolution Game"));
+    RenderWindow window(VideoMode(500, 400), String("French Revolution Game"));
     #endif
     #ifdef WASM
     // wasm window implementation here
     #endif
 
+    // C:/Users/pilla/Coding/French Revolution Game/bin/windows/
     Sprite king = loadSprite("king.png");
 
     // main loop runs as long as window is open
@@ -75,7 +76,7 @@ int main() {
         window.clear();
 
         // drawing here
-        drawSprite(king, 100, state.y, 61, 61, 0);
+        drawSprite(king, 100, state.y, 305, 305, 0);
 
         // updates display
         window.display();
